@@ -1,27 +1,28 @@
 import { useState } from "react";
 
-function Navbar() {
+function Layout() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [openLogin, setOpenLogin] = useState(false); // modal state
 
     return (
         <>
-            <div className="flex flex-col justify-between items-center h-screen w-[75px] bg-base-200 shadow-md">
-                
+
+            <div className="flex flex-col justify-between items-center h-screen w-[75px] bg-base-200  p-2 shadow-md">
+
                 {/* Drawer Button at Top */}
                 <div className="drawer mt-4">
                     <input id="my-drawer" type="checkbox" className="drawer-toggle" />
                     <div className="drawer-content">
                         <label htmlFor="my-drawer" className="btn btn-ghost btn-circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" 
-                                className="h-6 w-6" fill="none" 
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" 
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                     d="M4 6h16M4 12h16M4 18h7" />
                             </svg>
                         </label>
                     </div>
-                    
+
                     {/* Sidebar Drawer */}
                     <div className="drawer-side">
                         <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
@@ -54,7 +55,7 @@ function Navbar() {
                             </li>
                             <li><a>Settings</a></li>
                             <li><a>Logout</a></li>
-                            
+
                             {/* Show Login only if not logged in */}
                             {!isLoggedIn && (
                                 <li>
@@ -71,12 +72,53 @@ function Navbar() {
                 </div>
             </div>
 
+
+            <div className="drawer drawer-end">
+                {/* Drawer toggle input */}
+                <input id="notification-drawer" type="checkbox" className="drawer-toggle" />
+
+                {/* Page Content */}
+                <div className="drawer-content">
+                    {/* Bell Icon at top-right triggers drawer */}
+                    <label
+                        htmlFor="notification-drawer"
+                        className="btn btn-ghost btn-circle fixed top-4 right-4 z-50"
+                    >
+                        <div className="indicator">
+                            {/* Bell Icon */}
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                            </svg>
+
+                            {/* Badge */}
+                            <span className="badge badge-sm badge-primary indicator-item">3</span>
+                        </div>
+                    </label>
+                </div>
+
+                {/* Drawer Side (Right) */}
+                <div className="drawer-side">
+                    <label htmlFor="notification-drawer" className="drawer-overlay"></label>
+                    <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+                        <li><a>Notification 1</a></li>
+                        <li><a>Notification 2</a></li>
+                        <li><a>Notification 3</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
             {/* Login Modal */}
             {openLogin && (
                 <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
                     <div className="bg-base-100 p-6 rounded-lg shadow-lg w-96">
                         <h2 className="text-xl font-bold mb-4">Login</h2>
-                        
+
                         <input
                             type="text"
                             placeholder="Username"
@@ -87,7 +129,7 @@ function Navbar() {
                             placeholder="Password"
                             className="input input-bordered w-full mb-3"
                         />
-                        
+
                         <div className="flex justify-between">
                             <button
                                 className="btn btn-primary"
@@ -112,4 +154,4 @@ function Navbar() {
     );
 }
 
-export default Navbar;
+export default Layout;
