@@ -1,15 +1,18 @@
 function Navbar() {
     return (
         <>
-            <div className="drawer mx-auto  items-start ">
+            {/* <div className="drawer mx-auto  items-start "> */}
+            <div className="flex    justify-between   flex-col items-center  h-screen w-[75px]   bg-base-200  items-center  ">
+
                 <div className="drawer">
                     <input id="my-drawer" type="checkbox" className="drawer-toggle" />
                     <div className="drawer-content">
                         {/* Page content here */}
-                        <label htmlFor="my-drawer" className="btn btn-primary drawer-button"><div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+                        <label htmlFor="my-drawer" className="btn btn-secondary drawer-button"><div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /> </svg>
                         </div></label>
                     </div>
+                    
                     <div className="drawer-side">
                         <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
                         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
@@ -17,6 +20,30 @@ function Navbar() {
                             <li><a>Sidebar Item 1</a></li>
                             <li><a>Sidebar Item 2</a></li>
                         </ul>
+                    </div>
+                </div>
+                <div className="flex gap-2">
+                   
+                    <div className="dropdown dropdown-end">
+                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                        <div className="w-10 rounded-full">
+                        <img
+                            alt="Tailwind CSS Navbar component"
+                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                        </div>
+                    </div>
+                    <ul
+                        tabIndex={0}
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        <li>
+                        <a className="justify-between">
+                            Profile
+                            <span className="badge">New</span>
+                        </a>
+                        </li>
+                        <li><a>Settings</a></li>
+                        <li><a>Logout</a></li>
+                    </ul>
                     </div>
                 </div>
             </div>
