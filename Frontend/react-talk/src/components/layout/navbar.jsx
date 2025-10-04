@@ -1,5 +1,7 @@
 // import './App.css'
 import React, { useState } from 'react'
+import Login from './login'
+
 // import Layout from './components/layout/layout.jsx'
 // import Navbar from './components/layout/navbar.jsx'
 
@@ -10,7 +12,7 @@ function Navbar() {
   return (
     <>
      
-      <div className="flex flex-col fixed bg-base-300 justify-between items-center h-screen w-[75px] bg-base-200 p-2 ">
+      <div className="flex flex-col fixed  justify-between items-center h-screen w-[75px] bg-base-200 p-2 ">
 
         {/* Drawer Button at Top */}
         <div className="drawer mt-4">
@@ -74,6 +76,12 @@ function Navbar() {
           </div>
         </div>
       </div>
+      
+
+      <Login 
+      
+      log={openLogin}
+      />
       
     </>
   )
