@@ -1,9 +1,7 @@
-// import './App.css'
+// Navbar.jsx
 import React, { useState } from 'react'
 import Login from './login'
-
-// import Layout from './components/layout/layout.jsx'
-// import Navbar from './components/layout/navbar.jsx'
+import MicController from './miccontroller.jsx'
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -11,8 +9,7 @@ function Navbar() {
 
   return (
     <>
-     
-      <div className="flex flex-col fixed  justify-between items-center h-screen w-[75px] bg-base-200 p-2 ">
+      <div className="flex flex-col fixed justify-between items-center h-screen w-[75px] bg-base-200 p-2">
 
         {/* Drawer Button at Top */}
         <div className="drawer mt-4">
@@ -38,6 +35,11 @@ function Navbar() {
           </div>
         </div>
 
+        {/* 🔽 Mic Controller (just above profile avatar) */}
+        <div className="mt-6 ">
+          <MicController />
+        </div>
+
         {/* Profile Dropdown at Bottom */}
         <div className="mb-6">
           <div className="dropdown dropdown-top">
@@ -58,6 +60,7 @@ function Navbar() {
                   <span className="badge">New</span>
                 </a>
               </li>
+              <li><a className='{ThemeController}'>Theme</a></li>
               <li><a>Settings</a></li>
               <li><a>Logout</a></li>
 
@@ -76,13 +79,8 @@ function Navbar() {
           </div>
         </div>
       </div>
-      
 
-      <Login 
-      
-      log={openLogin}
-      />
-      
+      <Login log={openLogin} />
     </>
   )
 }
