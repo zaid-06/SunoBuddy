@@ -5,6 +5,8 @@ import Layout from './components/layout/layout.jsx'
 import Navbar from './components/layout/navbar.jsx'
 import Test from './components/layout/test.jsx'
 import Notification from './components/layout/notification.jsx'
+import Footer from './components/layout/footer.jsx'
+
 
 
 function App() {
@@ -18,15 +20,9 @@ function App() {
     <Test/>
     <Notification/>
     {/* <Layout/> */}
+    <Footer/>
 
-    
-        
-  
-
-   
-     
-    
-
+       
 
       </>
   )
