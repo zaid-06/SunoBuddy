@@ -1,6 +1,40 @@
 import React from "react";
+import * as LoginComponents from './login2.jsx';
+
 
 function Home() {
+
+  // () => window.location.href = '/login'
+
+  
+
+  function handleLogin() {
+      window.location.href = '/login';
+    
+  }
+  function handleVoice() {
+
+    if (LoginComponents.loggedIn) {
+      window.location.href = '/voiceBot';
+    }else{
+      window.location.href = '/login';
+    }
+
+  }
+
+  function handleChat(){
+    if (LoginComponents.loggedIn) {
+      window.location.href = '/chatBot';
+    }else{
+      window.location.href = '/login';
+    }
+  }
+
+
+
+
+
+
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden px-6 bg-gradient-to-b from-blue-50 via-indigo-50 to-purple-100 z-10">
       
@@ -30,8 +64,9 @@ function Home() {
        className="z-10 flex flex-col md:flex-row gap-10">
         {/* Card 1 */}
         <a
+          onClick={handleLogin}
           href="#"
-          onClick={() => window.location.href = '/login'}
+          
           className="group bg-white/50 backdrop-blur-lg hover:bg-white/70 active:scale-95 shadow-lg hover:shadow-xl rounded-2xl px-8 py-8 w-[280px] transition-transform duration-150 hover:-translate-y-2 border border-white/20 cursor-pointer"
         >
           <h3 className="text-blue-700 font-semibold text-lg mb-3 group-hover:text-blue-800">
@@ -45,6 +80,7 @@ function Home() {
 
         {/* Card 2 */}
         <a
+          onClick={handleVoice}
           href="#"
           className="group bg-white/50 backdrop-blur-lg hover:bg-white/70 active:scale-95 shadow-lg hover:shadow-xl rounded-2xl px-8 py-8 w-[280px] transition-transform duration-150 hover:-translate-y-2 border border-white/20 cursor-pointer"
         >
@@ -59,6 +95,7 @@ function Home() {
 
         {/* Card 3 */}
         <a
+        onClick={handleChat}
           href="#"
           className="group bg-white/50 backdrop-blur-lg hover:bg-white/70 active:scale-95 shadow-lg hover:shadow-xl rounded-2xl px-8 py-8 w-[280px] transition-transform duration-150 hover:-translate-y-2 border border-white/20 cursor-pointer"
         >

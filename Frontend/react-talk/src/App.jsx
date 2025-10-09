@@ -11,7 +11,7 @@ import MicController from './components/layout/miccontroller.jsx'
 import ChatBot from './components/layout/chatBot.jsx'
 import Home from './components/layout/home.jsx' 
 import MyNavbar from './components/layout/bootStrap.jsx'
-import LoginPage from './components/layout/login2.jsx'
+import  {LoginPage , loggedIn}  from './components/layout/login2.jsx'
 
  import {
     BrowserRouter as Router,
@@ -21,6 +21,8 @@ import LoginPage from './components/layout/login2.jsx'
   } from "react-router-dom";
 
 function App() {
+
+  
   
 
   return (
@@ -43,10 +45,10 @@ function App() {
 
     <Router>
     
-      <Navbar/>
+      {loggedIn && <Navbar />}
       <Notification/>
       
-      
+
         <Routes>
         
           {/* <Route exact path="/" element={<Home/>} /> */}

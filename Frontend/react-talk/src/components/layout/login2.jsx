@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { Mail, Lock } from "lucide-react";
+// let loggedIn = true;
 
-export default function LoginPage() {
+export function LoginPage() {
+
+
+
+
+  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -85,3 +92,7 @@ export default function LoginPage() {
     </div>
   );
 }
+
+
+export const loggedIn = false;
+
