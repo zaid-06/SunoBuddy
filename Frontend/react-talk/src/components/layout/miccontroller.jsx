@@ -1,61 +1,80 @@
 
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { Mic, MessageCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-// MicChatToggle.jsx
-// A compact, rounded toggle with two options: Mic and Chat.
-// Uses Tailwind classes (no external CSS required).
 
 export default function MicController({ onMicClick, onChatClick, initial = "chat" }) {
   const [mode, setMode] = useState(initial);
+  
+  const navigate = useNavigate();
+
+  useEffect(() => {
+  const interval = setInterval(() => {
+    setCount((prev) => prev + 1);
+  }, 1000);
+
+  return () => clearInterval(interval);
+}, []);
+
+
+
+
+
 
   function handleMic() {
     setMode("mic");
+    
     if (onMicClick) onMicClick();
+
+    navigate("/voiceBot");
+    // navigate("/chatBot");
   }
 
   function handleChat() {
     setMode("chat");
     if (onChatClick) onChatClick();
+    navigate("/chatBot");
+    
   }
 
   return (
     <div className=" ml-3 flex items-center justify-center">
-      <div className="inline-flex items-center rounded-full bg-white/90 shadow-lg p-1.5 gap-1">
+      <div className="inline-flex items-center rounded-full   p-1 gap-1">
         {/* Mic button */}
-       <div className="flex flex-col items-center gap-3">
-  {/* Mic button */}
-  <button
-    type="button"
-    onClick={handleMic}
-    aria-pressed={mode === "mic"}
-    aria-label="Use microphone"
-    className={`h-10 w-10 flex items-center justify-center rounded-full transition-all duration-150 ${
-      mode === "mic"
-        ? "bg-cyan-600 text-white shadow-md scale-105"
-        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-    }`}
-  >
-    <Mic className="h-4 w-4" />
-    <span className="sr-only">Mic</span>
-  </button>
+        <div className="flex flex-col items-center gap-3">
+          {/* Mic button */}
+          <button
+            type="button"
+            onClick={handleMic}
+            aria-pressed={mode === "mic"}
+            aria-label="Use microphone"
+            className={`h-10 w-10 flex items-center justify-center rounded-full transition-all duration-150 ${
+              mode === "mic"
+                ? "bg-cyan-600 text-white shadow-md scale-105"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+            }`}
+            >
+            <Mic className="h-4 w-4" />
+            <span className="sr-only">Mic</span>
+          </button>
 
-  {/* Chat button */}
-  <button
-    type="button"
-    onClick={handleChat}
-    aria-pressed={mode === "chat"}
-    aria-label="Open chat"
-    className={`h-10 w-10 flex items-center justify-center rounded-full transition-all duration-150 ${
-      mode === "chat"
-        ? "bg-cyan-600 text-white sha   dow-md scale-105"
-        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-    }`}
-  >
-    <MessageCircle className="h-4 w-4" />
-    <span className="sr-only">Chat</span>
-  </button>
-</div>
+        {/* Chat button */}
+          <button
+            type="button"
+            onClick={handleChat}
+            aria-pressed={mode === "chat"}
+            aria-label="Open chat"
+            className={`h-10 w-10 flex items-center justify-center rounded-full transition-all duration-150 ${
+              mode === "chat"
+                ? "bg-cyan-600 text-white shadow-md scale-105"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+            }`}
+            >
+              <MessageCircle className="h-4 w-4" />
+              <span className="sr-only">Chat</span>
+          </button>
+        </div>
 
       </div>
 

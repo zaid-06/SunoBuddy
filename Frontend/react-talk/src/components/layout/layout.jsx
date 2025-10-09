@@ -1,279 +1,245 @@
-import { useState } from "react";
+import { useState ,useEffect } from "react";
 // import Navbar from "./navbar"
 
 function Layout() {
+    
+    
+    const seconds=89;
+    const [count, setCount] = useState(0);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [openLogin, setOpenLogin] = useState(false); // modal state
+    const [clicked, setClicked] = useState(false);
+    // const [putTime, setTime] = useState({ seconds: 0, minuts: 0, hours: 0 });
+    const [countTime, setCountTime] = useState({ seconds: 0, minutes: 0, hours: 0 });
+
+
+    const [isRunning, setIsRunning] = useState(false); // start/stop state
+    
+    useEffect(() => {
+        let interval;
+
+        if (isRunning) {
+            interval = setInterval(() => {
+                setCountTime((prev) => {
+                let { seconds, minutes, hours } = prev;
+                seconds += 1;
+                if (seconds === 60) {
+                    seconds = 0;
+                    minutes += 1;
+                }
+
+                if (minutes === 60) {
+                    minutes = 0;
+                    hours += 1;
+                }
+                return { seconds, minutes, hours };
+                });
+
+            }, 1000);
+
+          
+
+        }
+        return () => clearInterval(interval);
+    }, [isRunning]);
+
+
+
+
+    
+
+
+    const [genderValue, setGenderValue] = useState(0);
+    const [bgColor, setBgColor] = useState("bg-green-600");
+    const images = [
+        [
+            "../public/images/bohemian-man-with-his-arms-crossed.jpg",
+            "../public/images/man-smiling-with-hands-hips.jpg",
+            "../public/images/bohemian-man-with-his-arms-crossed.jpg"
+        ],
+        [
+            "../public/images/man-smiling-with-hands-hips.jpg",
+            "../public/images/bohemian-man-with-his-arms-crossed.jpg",
+            "../public/images/bohemian-man-with-his-arms-crossed.jpg",
+        ]
+    ];
+
+    // Handle change function
+    const handleSelect = (e) => {
+        if (e.target.value === "Men") {
+            setGenderValue(0);
+        } else if (e.target.value === "Women") {
+            setGenderValue(1);
+        }
+    };
+
+    const changeBgColor = () => {
+
+        if (bgColor === "bg-red-600") {
+            setClicked(false);
+            setIsRunning((prev) => !prev); 
+            setBgColor("bg-green-600");
+        } else {
+            setClicked(true);
+
+            setCountTime({ seconds: 0, minutes: 0, hours: 0 });
+            setIsRunning((prev) => !prev); 
+            setBgColor("bg-red-600");
+        }
+
+    }
+
+
+    
+
 
     return (
         <>
+            <div className=" relative inset-0      flex h-175 justify-center">
 
-            <div className="flex  bg-slate-200 justify-between ">
-
-
-          
-                 <div className=" flex    flex-col justify-between items-center h-screen w-[75px] bg-base-200  p-2 shadow-md">
-
-                    {/* Drawer Button at Top */}
-                    
-                    <div className="drawer mt-4">
-                        <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-                        <div className="drawer-content">
-                            <label htmlFor="my-drawer" className="btn btn-ghost btn-circle">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    className="h-6 w-6" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                        d="M4 6h16M4 12h16M4 18h7" />
-                                </svg>
-
-                            </label>
-                        </div>
-
-                        {/* Sidebar Drawer */}
-                        <div className="drawer-side">
-                            <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-                            <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-                                <li><a>Sidebar Item 1</a></li>
-                                <li><a>Sidebar Item 2</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-
-                    {/* Profile Dropdown at Bottom */}
-                    <div className="mb-6">
-                        <div className="dropdown dropdown-top">
-                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full">
-                                    <img
-                                        alt="User Avatar"
-                                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                                    />
-                                </div>
-                            </div>
-                            <ul
-                                tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mb-3 w-52 p-2 shadow">
-                                <li>
-                                    <a className="justify-between">
-                                        Profile
-                                        <span className="badge">New</span>
-                                    </a>
-                                </li>
-                                <li><a>Settings</a></li>
-                                <li><a>Logout</a></li>
-
-                                {/* Show Login only if not logged in */}
-                                {!isLoggedIn && (
-                                    <li>
-                                        <button
-                                            onClick={() => setOpenLogin(true)}
-                                            className="btn btn-primary w-full"
-                                        >
-                                            Login
-                                        </button>
-                                    </li>
-                                )}
-                            </ul>
-                        </div>
-                    </div>
+                {/* Background Video */}
+                {/* <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover -z-10"
+                >
+                    <source src="/images/33194-396036988.mp4" type="video/mp4" />
+                </video> */}
+                <img
+                    className="absolute inset-0 w-full h-full object-cover -z-10"
+                    src="/images/banner-background.webp"
+                    alt=""
+                />
+               
+                <div className=" absolute   top-5  left-25 ">
+                    <h1 className="text-2xl  font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Suno Buddy</h1>
                 </div>
 
 
                 
-                {/* <div className="flex w-[940px] justify-between "> */}
-                {/* <div className="bg-green-200  w-full md:w-2/4  ml-auto flex  justify-between "> */}
+                <div className=" relative  left-1/2 transform -translate-x-1/2  border-1 border-gray-500 flex mt-5  shadow-xl rounded-xl shadow-black/100 h-140 w-[800px]  bg-white   items-center justify-center">
 
-                {/* <div className=" border-3 border-gray-500 flex mt-5 mb-2 shadow-lg  rounded-lg   h-142 w-[450px] inset-0    bg-cyan-100 items-center justify-center ">
-
-                        <img className="h-140"src="../public/images/bohemian-man-with-his-arms-crossed.jpg" alt="" 
-                        />
-                        <div className="bg-base-100 p-6 ml-30 mr-30 mt-120 mb-7 rounded-lg shadow-lg w-96 h-15 flex items-center justify-center">
-                             <span className="font-bold text-xl">START</span>
-                              </div>
-
-                                
-                </div> */}
-
-                <div className="relative border-3 border-gray-500 flex mt-5 mb-2 shadow-lg rounded-lg h-142 w-[450px] bg-cyan-100 items-center justify-center">
-  
-                {/* Image */}
-                    <img
+                    {/* Image */}
+                    {/* <img
                         className="h-140 w-full object-cover rounded-lg"
-                        src="../public/images/bohemian-man-with-his-arms-crossed.jpg"
+                        src="/images/man-smiling-with-hands-hips.jpg"
                         alt=""
+                    /> */}
+                    <img
+                    className="h-full w-120 object-cover rounded-lg z-0"
+                    src="/images/bohemian-man-with-his-arms-crossedPng-Photoroom.png"
+                    alt=""
                     />
 
-                {/* START Box Overlay */}
-                    <div className="absolute top-120 left-1/2 transform -translate-x-1/2 bg-base-100 p-3 rounded-lg shadow-lg w-40 flex items-center justify-center">
-                        <span className="font-bold text-xl">START</span>
+                    {/* clicked call button */}
+
+                    {clicked && (
+
+                        <div className={`absolute top-100 left-1/2 transform -translate-x-1/2 p-3    w-40 flex items-center justify-center active:scale-95 transition-transform duration-150`}>
+                            {/* For TSX uncomment the commented types below */}
+                            <span className="countdown font-mono text-2xl">
+                                <span style={{ "--value": countTime.hours } /* as React.CSSProperties */} aria-live="polite" ></span>:
+                                <span style={{ "--value": countTime.minutes } /* as React.CSSProperties */} aria-live="polite" ></span>:
+                                <span style={{ "--value": countTime.seconds} /* as React.CSSProperties */} aria-live="polite"></span>
+                                {/* <span style={{ "--value": 59 } } aria-live="polite" aria-label={89}></span> */}
+                                {/* aria-label={} */}
+                            </span>
+
+                        </div>
+                    )}
+
+                    <div  className={`absolute bottom-23   `}>
+                        <h1 className="text-1xl font-extrabold tracking-wide    ">Ahmed</h1>
                     </div>
+                    
+                    {/* call button  */}
+                    {/* <div
+                    onClick={changeBgColor}
+                    className={`absolute top-120 left-1/2 transform -translate-x-1/2 z-20 p-3 btn-circle ${bgColor} shadow-lg w-20 flex items-center justify-center active:scale-95 transition-transform duration-150`}
+                    > */}
+                    <div onClick={changeBgColor} className={`absolute  top-120 left-1/2 transform -translate-x-1/2 p-3 btn-circle ${bgColor} shadow-lg w-20 flex items-center justify-center active:scale-95 transition-transform duration-150`}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-telephone" viewBox="0 0 16 16">
+                            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58z" />
+                        </svg>
+                    </div>
+                    
+
 
                 </div>
 
+                <div className="flex flex-col mt-4 gap-2 items-end ml-auto ">
 
-                     
-
-
-                    
-                    
-
-            
-
-                <div className="flex flex-col ">
-
-                        <div className="flex  flex-row drawer-content">
+                    {/* <div className="flex  flex-row drawer-content mr-17 gap-2  ">
                         
-
-                       
-                            <div className=" shadow-lg  fixed top-4 right-17">
-                                    <select
-                                        defaultValue="Gender"
-                                        className="select select-accent w-26 "
-                                    >
+                            <div className=" shadow-lg    right-17">
+                                    <select defaultValue="Gender" className="select select-accent w-26 ">
                                         <option disabled={true}>Talk to</option>
                                         <option>Men</option>
                                         <option>Women</option>
                                     </select>
-                                    
-                                {/* <button
-                                    onClick={() => setOpenLogin(true)}
-                                    className="btn btn-primary w-full"
-                                >
-                                    Login
-                                </button> */}
-                                        
-
-                            </div>
-                        
-
-
-                            <div className="drawer drawer-end  w-[75px] ">
-                            {/* Drawer toggle input */}
-
-                                <input id="notification-drawer" type="checkbox" className="drawer-toggle" />
-
-                                {/* Page Content */}
-                                <div className="drawer-content">
-                                    {/* Bell Icon at top-right triggers drawer */}
-                                    <label htmlFor="notification-drawer" className="btn btn-ghost btn-circle bg-cyan-100 shadow-lg fixed top-4 right-4 z-50">
-                                        <div className="indicator">
-                                            {/* Bell Icon */}
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                className="h-6 w-6" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth="2"
-                                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                                            </svg>
-
-                                            {/* Badge */}
-                                            <span className="badge badge-sm badge-primary indicator-item">3</span>
-                                        </div>
-                                    </label>
-                                </div>
-
-                                {/* Drawer Side (Right) */}
-                                <div className="drawer-side">
-                                    <label htmlFor="notification-drawer" className="drawer-overlay"></label>
-                                    <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-                                        <li><a>Notification 1</a></li>
-                                        <li><a>Notification 2</a></li>
-                                        <li><a>Notification 3</a></li>
-                                    </ul>
-                                </div>
+               
                             </div>
 
+                        </div> */}
+
+                    <div className="flex flex-row drawer-content mr-17 gap-2">
+                        <div className="shadow-lg right-17">
+                            <select defaultValue="Gender" className="select select-accent w-26" onChange={handleSelect}>
+                                <option disabled>Talk to</option>
+                                <option>Men</option>
+                                <option>Women</option>
+                            </select>
                         </div>
+                        {/* For checking output */}
 
 
-                        <div className="card top-18 right-3 bg-base-100 fixed  w-40 shadow-sm">
-                            <figure >
-                                <img className="h-35"
-                                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                    </div>
+
+
+                    <div className="card  right-3 bg-base-100   w-40 shadow-lg hover:shadow-2xl">
+                        <figure >
+                            <img className="h-35"
+                                src={images[genderValue][0]}
                                 alt="Shoes" />
-                            </figure>
-                            
-                                <h2 className="card-title  ">Angena</h2>
-                                
-                            
+                        </figure>
+                        <div className="flex justify-center">
+                        <h2 className="card-title  ">Angena</h2>
                         </div>
-                        <div className="card top-62 right-3 bg-base-100 fixed  w-40 shadow-sm">
-                            <figure >
-                                <img className="h-35"
-                                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                    </div>
+                    <div className="card  right-3 bg-base-100   w-40 shadow-lg hover:shadow-2xl">
+                        <figure >
+                            <img className="h-35"
+                                src={images[genderValue][1]}
                                 alt="Shoes" />
-                            </figure>
-                            
-                                <h2 className="card-title  ">John</h2>
-                                
-                            
+                        </figure>
+                        <div className="flex justify-center">
+                        <h2 className="card-title  ">John</h2>
                         </div>
-                        <div className="card top-106 right-3 bg-base-100 fixed  w-40 shadow-sm">
-                            <figure >
-                                <img className="h-35"
-                                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                    </div>
+                    <div className="card  right-3 bg-base-100  w-40 shadow-lg hover:shadow-2xl">
+                        <figure >
+                            <img className="h-35"
+                                src={images[genderValue][2]}
                                 alt="Shoes" />
-                            </figure>
-                            
-                                <h2 className="card-title  ">Ahmad</h2>
-                                
-                            
+                        </figure>
+
+                        <div className="flex justify-center">
+                            <h2 className="card-title">Ahmad</h2>
                         </div>
 
 
-
-
-                    
+                    </div>
                 </div>
-                {/* </div> */}
-
                 
 
-          
             </div>
 
 
             {/* Login Modal */}
-            {openLogin && (
-                <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="bg-base-100 p-6 rounded-lg shadow-lg w-96">
-                        <h2 className="text-xl font-bold mb-4">Login</h2>
 
-                        <input
-                            type="text"
-                            placeholder="Username"
-                            className="input input-bordered w-full mb-3"
-                        />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            className="input input-bordered w-full mb-3"
-                        />
 
-                        <div className="flex justify-between">
-                            <button
-                                className="btn btn-primary"
-                                onClick={() => {
-                                    setIsLoggedIn(true);
-                                    setOpenLogin(false); // close modal after login
-                                }}
-                            >
-                                Login
-                            </button>
-                            <button
-                                className="btn"
-                                onClick={() => setOpenLogin(false)}
-                            >
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
-           
         </>
     );
 }

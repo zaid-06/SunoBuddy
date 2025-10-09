@@ -8,9 +8,17 @@ import Notification from './components/layout/notification.jsx'
 import Footer from './components/layout/footer.jsx'
 import MicController from './components/layout/miccontroller.jsx'
 // import ThemeController from './components/layout/themcontroller.jsx'
+import ChatBot from './components/layout/chatBot.jsx'
+import Home from './components/layout/home.jsx' 
+import MyNavbar from './components/layout/bootStrap.jsx'
+import LoginPage from './components/layout/login2.jsx'
 
-
-
+ import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Link
+  } from "react-router-dom";
 
 function App() {
   
@@ -19,21 +27,44 @@ function App() {
     <>
 
 
-    <Navbar/>
-    <Test/>
-    <Notification/>
+    {/* <Navbar/> */}
+    {/* <Test/> */}
+    {/* <Notification/> */}
     {/* <ThemeController/> */}
     {/* <Layout/> */}
-    <Footer/>
-    {/* <MicController/> */}
+     {/* <ChatBot/> */}
     
-    {/* 
    
-       */}
+   {/* <MyNavbar/> */}
+   
 
-       
 
-      </>
+   
+
+    <Router>
+    
+      <Navbar/>
+      <Notification/>
+      
+      
+        <Routes>
+        
+          {/* <Route exact path="/" element={<Home/>} /> */}
+          <Route exact path="/" element={<Home/>} />
+          <Route exact path="/login" element={<LoginPage/>} />
+          <Route exact path="/voiceBot" element={<Layout/>} />
+          <Route exact path="/chatBot" element={<ChatBot/>} />
+
+         
+
+          {/* <Route exact path="/" element={<TextForm heading="Enter text to analyze" mode={mode} />} /> */}
+        </Routes>
+    
+
+      <Footer/>
+    </Router>
+    
+  </>
   )
 }
 

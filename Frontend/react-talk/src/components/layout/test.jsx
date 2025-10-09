@@ -1,21 +1,53 @@
-import { useState } from "react";
+import { useState ,useEffect } from "react";
+import MicController from './miccontroller.jsx'
 // import Navbar from "./navbar"
 
 function Test() {
-    const time = {
-        seconds:0,
-        minuts:0,
-        hours:0 
     
-         
-        
-    };
     
     const seconds=89;
+    const [count, setCount] = useState(0);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [openLogin, setOpenLogin] = useState(false); // modal state
     const [clicked, setClicked] = useState(false);
-    const [putTime, setTime] = useState({ seconds: 0, minuts: 0, hours: 0 });
+    // const [putTime, setTime] = useState({ seconds: 0, minuts: 0, hours: 0 });
+    const [countTime, setCountTime] = useState({ seconds: 0, minutes: 0, hours: 0 });
+
+
+    const [isRunning, setIsRunning] = useState(false); // start/stop state
+    
+    useEffect(() => {
+        let interval;
+
+        if (isRunning) {
+            interval = setInterval(() => {
+                setCountTime((prev) => {
+                let { seconds, minutes, hours } = prev;
+                seconds += 1;
+                if (seconds === 60) {
+                    seconds = 0;
+                    minutes += 1;
+                }
+
+                if (minutes === 60) {
+                    minutes = 0;
+                    hours += 1;
+                }
+                return { seconds, minutes, hours };
+                });
+
+            }, 1000);
+
+          
+
+        }
+        return () => clearInterval(interval);
+    }, [isRunning]);
+
+
+
+
+    
 
 
     const [genderValue, setGenderValue] = useState(0);
@@ -32,8 +64,6 @@ function Test() {
             "../public/images/bohemian-man-with-his-arms-crossed.jpg",
         ]
     ];
- 
-
 
     // Handle change function
     const handleSelect = (e) => {
@@ -45,43 +75,92 @@ function Test() {
     };
 
     const changeBgColor = () => {
+
         if (bgColor === "bg-red-600") {
             setClicked(false);
+            setIsRunning((prev) => !prev); 
             setBgColor("bg-green-600");
         } else {
             setClicked(true);
 
+            setCountTime({ seconds: 0, minutes: 0, hours: 0 });
+            setIsRunning((prev) => !prev); 
             setBgColor("bg-red-600");
         }
-
-
 
     }
 
 
+    
+
+
     return (
         <>
-            <div className=" inset-0  -z-10  flex    flex h-200  bg-slate-300 justify-center">
+            <div className=" relative inset-0      flex h-200  justify-center">
 
-                <div className="relative absolute left-1/2 transform -translate-x-1/2  border-3 border-gray-500 flex mt-5 mb-2 shadow-lg rounded-lg h-142 w-[450px] bg-cyan-100 items-center justify-center">
+                {/* Background Video */}
+                {/* <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover -z-10"
+                >
+                    <source src="/images/33194-396036988.mp4" type="video/mp4" />
+                </video> */}
+
+                <img
+                    className="absolute inset-0 w-full h-full object-cover -z-10"
+                    src="/images/banner-background.webp"
+                    alt=""
+                />
+
+                
+               
+               
+                <div className=" absolute   top-5  left-25 ">
+                    <h1 className="text-2xl  font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Suno Buddy</h1>
+                </div>
+
+
+                
+                <div className=" relative  left-1/2 transform -translate-x-1/2  border-1  flex mt-4  shadow-xl rounded-2xl shadow-black/100 h-130 w-[800px]  bg-gray-500  items-center justify-center">
+                <div className=" relative  left-1/2 transform -translate-x-1/2   flex bg-white   h-122 w-[800px]    items-center justify-center">
 
                     {/* Image */}
-                    <img
+                    {/* <img
                         className="h-140 w-full object-cover rounded-lg"
-                        src="../public/images/man-smiling-with-hands-hips.jpg"
+                        src="/images/man-smiling-with-hands-hips.jpg"
                         alt=""
+                    /> */}
+                     {/* <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover -z-10"
+                        >
+                    <source src="/images/126560-736345309_small.mp4" type="video/mp4" />
+                </video> */}
+
+
+
+                    <img
+                    className="h-full w-120 object-cover rounded-lg z-0"
+                    src="/images/bohemian-man-with-his-arms-crossedPng-Photoroom.png"
+                    alt=""
                     />
 
-                    {/* START Box Overlay */}
+                    {/* clicked call button */}
 
                     {clicked && (
 
-                        <div className={`absolute top-105 left-1/2 transform -translate-x-1/2 p-3    w-40 flex items-center justify-center active:scale-95 transition-transform duration-150`}>
+                        <div className={`absolute bottom-25 left-1/2 transform -translate-x-1/2 p-3    w-40 flex items-center justify-center active:scale-95 transition-transform duration-150`}>
                             {/* For TSX uncomment the commented types below */}
                             <span className="countdown font-mono text-2xl">
-                                <span style={{ "--value": 3 } /* as React.CSSProperties */} aria-live="polite" ></span>:
-                                <span style={{ "--value":4 } /* as React.CSSProperties */} aria-live="polite" ></span>:
-                                <span style={{ "--value": seconds} /* as React.CSSProperties */} aria-live="polite"></span>
+                                <span style={{ "--value": countTime.hours } /* as React.CSSProperties */} aria-live="polite" ></span>:
+                                <span style={{ "--value": countTime.minutes } /* as React.CSSProperties */} aria-live="polite" ></span>:
+                                <span style={{ "--value": countTime.seconds} /* as React.CSSProperties */} aria-live="polite"></span>
                                 {/* <span style={{ "--value": 59 } } aria-live="polite" aria-label={89}></span> */}
                                 {/* aria-label={} */}
                             </span>
@@ -89,15 +168,47 @@ function Test() {
                         </div>
                     )}
 
-
-                    <div onClick={changeBgColor} className={`absolute top-120 left-1/2 transform -translate-x-1/2 p-3 btn-circle ${bgColor} shadow-lg w-20 flex items-center justify-center active:scale-95 transition-transform duration-150`}>
+                    <div  className={`absolute bottom-20   `}>
+                        <h1 className="text-xl font-extrabold tracking-wide  text-white  ">Ahmed</h1>
+                    </div>
+                    
+                    {/* call button  */}
+                    {/* <div
+                    onClick={changeBgColor}
+                    className={`absolute top-120 left-1/2 transform -translate-x-1/2 z-20 p-3 btn-circle ${bgColor} shadow-lg w-20 flex items-center justify-center active:scale-95 transition-transform duration-150`}
+                    > */}
+                    <div onClick={changeBgColor} className={`absolute  bottom-7 left-1/2 transform -translate-x-1/2 p-3 btn-circle ${bgColor} shadow-lg w-20 flex items-center justify-center active:scale-95 transition-transform duration-150`}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-telephone" viewBox="0 0 16 16">
                             <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58z" />
                         </svg>
                     </div>
+                    
 
 
                 </div>
+                </div>
+
+                <div className=" absolute  items-center justify-center top-135  ">
+
+                  
+                        
+                        <div className=" flex inline-flex  ml-3 justify-between justify-center items-center rounded-full w-80 bg-white shadow-lg p-1 gap-10">
+                            <button class="btn bg-white hover:bg-gray-800 btn-circle  ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-caret-left" viewBox="0 0 16 16">
+                                    <path d="M10 12.796V3.204L4.519 8zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753"></path>
+                                </svg>
+                            </button>
+                            <MicController/>
+                            <button class="btn bg-white hover:bg-gray-800 btn-circle  ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-caret-right" viewBox="0 0 16 16">
+                                    <path d="M6 12.796V3.204L11.481 8zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753"/>
+                                </svg>
+                            </button>
+                        </div>
+            
+
+                </div>
+                
 
                 <div className="flex flex-col mt-4 gap-2 items-end ml-auto ">
 
@@ -128,14 +239,14 @@ function Test() {
                     </div>
 
 
-                    <div className="card  right-3 bg-base-100   w-40 shadow-sm">
+                    <div className="card right-3 bg-base-100 w-40 shadow-sm ">
                         <figure >
                             <img className="h-35"
                                 src={images[genderValue][0]}
                                 alt="Shoes" />
                         </figure>
                         <div className="flex justify-center">
-                        <h2 className="card-title  ">Angena</h2>
+                        <h2 className="card-title  ">Angen</h2>
                         </div>
                     </div>
                     <div className="card  right-3 bg-base-100   w-40 shadow-sm">
@@ -162,6 +273,7 @@ function Test() {
 
                     </div>
                 </div>
+                
 
             </div>
 
