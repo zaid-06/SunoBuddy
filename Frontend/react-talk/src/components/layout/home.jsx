@@ -32,9 +32,6 @@ function Home() {
 
 
 
-
-
-
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden px-6 bg-gradient-to-b from-blue-50 via-indigo-50 to-purple-100 z-10">
       
@@ -94,7 +91,7 @@ function Home() {
           </h3>
           <p className="text-gray-700 text-sm leading-relaxed group-hover:text-gray-900">
             You will Speak with a real AI Avtar. <br />
-            Chat, create, and innovate anywhere. 
+            Speak, Improve your communication, and innovate anywhere. 
           </p>
         </a>
 
