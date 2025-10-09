@@ -62,8 +62,11 @@ function Home() {
       {/* 💎 Cards Section */}
       <div
        className="z-10 flex flex-col md:flex-row gap-10">
+
         {/* Card 1 */}
-        <a
+        {
+            !LoginComponents.loggedIn && (
+              <a
           onClick={handleLogin}
           href="#"
           
@@ -77,6 +80,8 @@ function Home() {
             Experience next-level AI performance.
           </p>
         </a>
+            )}
+        
 
         {/* Card 2 */}
         <a
@@ -88,8 +93,8 @@ function Home() {
             Start Speaking
           </h3>
           <p className="text-gray-700 text-sm leading-relaxed group-hover:text-gray-900">
-            Use DeepSeek on mobile. <br />
-            Chat, create, and innovate anywhere.
+            You will Speak with a real AI Avtar. <br />
+            Chat, create, and innovate anywhere. 
           </p>
         </a>
 

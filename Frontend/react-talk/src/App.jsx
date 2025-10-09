@@ -13,7 +13,7 @@ import Home from './components/layout/home.jsx'
 import MyNavbar from './components/layout/bootStrap.jsx'
 import  {LoginPage , loggedIn}  from './components/layout/login2.jsx'
 
- import {
+ import { 
     BrowserRouter as Router,
     Routes,
     Route,
@@ -46,7 +46,7 @@ function App() {
     <Router>
     
       {loggedIn && <Navbar />}
-      <Notification/>
+      {loggedIn && <Notification />}
       
 
         <Routes>
