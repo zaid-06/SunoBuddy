@@ -11,7 +11,9 @@ import MicController from './components/layout/miccontroller.jsx'
 import ChatBot from './components/layout/chatBot.jsx'
 import Home from './components/layout/home.jsx' 
 import MyNavbar from './components/layout/bootStrap.jsx'
+// import Logo from './components/layout/logo.jsx'
 import  {LoginPage , loggedIn}  from './components/layout/login2.jsx'
+
 
  import { 
     BrowserRouter as Router,
@@ -21,9 +23,13 @@ import  {LoginPage , loggedIn}  from './components/layout/login2.jsx'
   } from "react-router-dom";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   
   
+  if (isLoggedIn){
+    console.log("i am in the jsx");
+  }
 
   return (
     <>
@@ -38,24 +44,23 @@ function App() {
     
    
    {/* <MyNavbar/> */}
-   
-
-
-   
 
     <Router>
     
-      {loggedIn && <Navbar />}
-      {loggedIn && <Notification />}
-      
+      {isLoggedIn && <Navbar />}
+
+      {isLoggedIn && <Notification />}
 
         <Routes>
-        
+
           {/* <Route exact path="/" element={<Home/>} /> */}
-          <Route exact path="/" element={<Home/>} />
-          <Route exact path="/login" element={<LoginPage/>} />
+          <Route exact path="/" element={<Home  logged={isLoggedIn}/>} />
+          {/* <Route exact path="/login" element={<LoginPage/>} /> */}
+
           <Route exact path="/voiceBot" element={<Layout/>} />
           <Route exact path="/chatBot" element={<ChatBot/>} />
+          <Route exact path="/login" element={<LoginPage onLoginSuccess={() => setIsLoggedIn(true)} />} />
+
 
          
 
@@ -71,11 +76,6 @@ function App() {
 }
 
 export default App
-
-
-
-
-
 
 //    <div className="relative">
 //   {/* Pehle wala div (upar dikhana hai) */}

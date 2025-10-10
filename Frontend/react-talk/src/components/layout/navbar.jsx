@@ -65,13 +65,7 @@ function Navbar() {
             </label>
         </div>
 
-
-
-
-
-
-
-
+        
 
         </div>
 

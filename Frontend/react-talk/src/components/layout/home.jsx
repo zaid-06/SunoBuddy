@@ -1,20 +1,25 @@
 import React from "react";
 import * as LoginComponents from './login2.jsx';
 
+import { Share } from "lucide-react";
 
-function Home() {
+
+function Home(props) {
 
   // () => window.location.href = '/login'
 
-  
+  console.log("in home page: ", props.logged);
 
   function handleLogin() {
       window.location.href = '/login';
     
   }
+
+
   function handleVoice() {
 
-    if (LoginComponents.loggedIn) {
+    if (props.logged) {
+      
       window.location.href = '/voiceBot';
     }else{
       window.location.href = '/login';
@@ -22,8 +27,9 @@ function Home() {
 
   }
 
+
   function handleChat(){
-    if (LoginComponents.loggedIn) {
+    if (props.logged) {
       window.location.href = '/chatBot';
     }else{
       window.location.href = '/login';
@@ -46,14 +52,16 @@ function Home() {
       {/* 🚀 Info Bar */}
       <p className="z-10 text-sm text-gray-700 mb-6 flex items-center gap-2 bg-white/50 px-4 py-2 rounded-full shadow-sm backdrop-blur-md">
         🚀 <span>Improve your English with my AI Agents.</span>
+
       </p>
 
       {/* 💫 Logo / Title */}
       <h1 className="z-10 text-6xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 drop-shadow-lg mb-3">
-        SunoBuddy
+        HelloBuddy
       </h1>
       <p className="z-10 text-xl text-gray-700 font-medium mb-14 tracking-wide">
         Dive into the Future of Intelligence
+
       </p>
 
       {/* 💎 Cards Section */}
@@ -62,7 +70,7 @@ function Home() {
 
         {/* Card 1 */}
         {
-            !LoginComponents.loggedIn && (
+          !props.logged && (
               <a
           onClick={handleLogin}
           href="#"
@@ -70,7 +78,7 @@ function Home() {
           className="group bg-white/50 backdrop-blur-lg hover:bg-white/70 active:scale-95 shadow-lg hover:shadow-xl rounded-2xl px-8 py-8 w-[280px] transition-transform duration-150 hover:-translate-y-2 border border-white/20 cursor-pointer"
         >
           <h3 className="text-blue-700 font-semibold text-lg mb-3 group-hover:text-blue-800">
-            Login Free
+            Login Free now
           </h3>
           <p className="text-gray-700 text-sm leading-relaxed group-hover:text-gray-900">
             Get free access to DeepSeek-V3.2. <br />
@@ -112,19 +120,15 @@ function Home() {
       </div>
 
       {/* 🌐 Top Right Menu */}
-      <div className="absolute top-6 right-10 flex items-center gap-6 text-gray-600 text-sm z-10">
-        <a
+      <div className="absolute top-6 right-18 flex items-center gap-6 text-gray-600 text-sm z-10">
+         <a
           href="#"
-          className="hover:text-blue-600 transition-colors duration-200"
+          className="flex items-center gap-2 hover:text-blue-600 right-18 transition-colors duration-200"
         >
-          Docs ↗
+          <Share className="w-4 h-4" />
+          <span>Share</span>
         </a>
-        <a
-          href="#"
-          className="hover:text-blue-600 transition-colors duration-200"
-        >
-          中文
-        </a>
+        
       </div>
 
       {/* 🌀 Custom Animations */}
