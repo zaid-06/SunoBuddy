@@ -54,8 +54,6 @@ export function LoginPage({ onLoginSuccess }) {
   const handleGoogleLogin = () => {
     console.log("Login with Google clicked"); 
     
-    
-    
   };
   function createAccountClcked(){
     navigate("/register");

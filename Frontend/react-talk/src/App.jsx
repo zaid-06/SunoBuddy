@@ -10,6 +10,7 @@ import ChatBot from './components/layout/chatBot.jsx'
 import Home from './components/layout/home.jsx'
 import About from './components/layout/about.jsx'
 import { LoginPage } from './components/layout/login2.jsx'
+import  Logo from './components/layout/logo.jsx'
 import { RegisterPage } from './components/layout/Register.jsx'
 
 
@@ -46,6 +47,7 @@ function App() {
     <Router>
       {isLoggedIn && <Navbar onLogout={handleLogout} passtalkMode= {talkMode}/>}
       {isLoggedIn && <Notification />}
+      <Logo />
 
       <Routes>
         <Route exact path="/" element={<Home logged={isLoggedIn} handleTalkMode = {handleTalkModeChange} />} />

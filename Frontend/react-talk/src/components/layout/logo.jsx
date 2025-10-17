@@ -1,34 +1,51 @@
-// import React from "react";
+import React from "react";
 
+export default function Logo() {
+  return (
+    <div className="fixed top-2 left-25 flex flex-col items-center z-50 scale-60">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-10 h-10"
+      >
+        {/* 🌈 Gradient Definitions */}
+        <defs>
+          {/* Left circle gradient */}
+          <linearGradient id="gradientLeft" x1="0" y1="0" x2="24" y2="24">
+            <stop offset="0%" stopColor="#8B5CF6" /> {/* violet-500 */}
+            <stop offset="100%" stopColor="#EC4899" /> {/* pink-500 */}
+          </linearGradient>
 
-// // Five distinct HelloBuddy logo/icon React components using Tailwind CSS.
-// // Each component accepts: size (number, px), className (string) and primary (Tailwind color class or hex)
-// // There's also a HelloBuddyLogoGallery default export to preview all five.
+          {/* Right circle gradient */}
+          <linearGradient id="gradientRight" x1="0" y1="0" x2="24" y2="24">
+            <stop offset="0%" stopColor="#14B8A6" /> {/* teal-500 */}
+            <stop offset="100%" stopColor="#06B6D4" /> {/* cyan-500 */}
+          </linearGradient>
+        </defs>
 
+        {/* 🟣 Left circle */}
+        <circle
+          cx="9.5"
+          cy="12"
+          r="7.5"
+          stroke="url(#gradientLeft)"
+          strokeWidth="2"
+        />
 
-// function Logo({ size = 64, className = "", primary = "bg-blue-500" }) {
-// // Chat-bubble + smile icon
-// return (
-// <div className={`flex items-center space-x-3 ${className}`} style={{ width: size * 3 }}>
-// <div
-// className={`flex items-center justify-center rounded-lg p-2 ${primary} text-white shadow-lg`}
-// style={{ width: size, height: size }}
-// >
-// <svg viewBox="0 0 24 24" width={size * 0.6} height={size * 0.6} aria-hidden>
-// <path fill="currentColor" d="M21 6.5A4.5 4.5 0 0 0 16.5 2h-9A4.5 4.5 0 0 0 3 6.5v5A4.5 4.5 0 0 0 7.5 16H9v3l3-3h4.5A4.5 4.5 0 0 0 21 11.5v-5z" />
-// <circle fill="white" cx="9.5" cy="9" r="1" />
-// <circle fill="white" cx="13.5" cy="9" r="1" />
-// <path fill="white" d="M8.5 12.2c1 1 3 1 4 0" stroke="white" strokeWidth="0" />
-// </svg>
-// </div>
-// <div>
-// <div className="text-lg font-semibold">HelloBuddy</div>
-// <div className="text-xs text-gray-500">chat + friendly</div>
-// </div>
-// </div>
+        {/* 🟢 Right circle */}
+        <circle
+          cx="14.5"
+          cy="12"
+          r="7.5"
+          stroke="url(#gradientRight)"
+          strokeWidth="2"
+        />
+      </svg>
 
-
-
-// );
-// }
-// export { Logo };
+      <h2 className="text-xs font-semibold mt-0.5 bg-gradient-to-r from-teal-400 via-cyan-400 to-purple-400 text-transparent bg-clip-text">
+        HelloBuddy
+      </h2>
+    </div>
+  );
+}

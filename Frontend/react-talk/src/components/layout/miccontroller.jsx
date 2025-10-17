@@ -18,7 +18,6 @@ export default function MicController({ onMicClick, onChatClick, initial }) {
   //   const interval = setInterval(() => {
   //     setCount((prev) => prev + 1);
   //   }, 1000);
-
   //   return () => clearInterval(interval);
   // }, []);
 

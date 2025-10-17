@@ -85,10 +85,13 @@ import MicController from './miccontroller.jsx'
 
           </div>
         
-          
+          {/* micBot and chatBot */}
           <div className="mt-6 ">
             <MicController initial={passtalkMode}  />
           </div>
+
+
+
           
           <div className="dropdown dropdown-top">
             {/* 🔹 Avatar Button */}

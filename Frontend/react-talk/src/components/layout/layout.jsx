@@ -113,9 +113,7 @@ function Layout() {
                     alt=""
                 />
                
-                <div className=" absolute   top-5  left-25 ">
-                    <h1 className="text-2xl  font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Suno Buddy</h1>
-                </div>
+               
 
 
                 

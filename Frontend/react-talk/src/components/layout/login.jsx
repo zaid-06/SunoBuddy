@@ -1,9 +1,23 @@
-import React , { useState } from 'react'
+import {React ,  useState, useEffect} from 'react'
 import { X } from "lucide-react";
 import { Settings, User, Database, FileText } from "lucide-react";
  import { useNavigate } from "react-router-dom";
 
+
+
+
 export default function Login({handleLog, log }) {
+
+
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+   
+
+
+
+
+
+
 
     const navigate = useNavigate();
     const [activeIndex, setActiveIndex] = useState(0);  
@@ -18,12 +32,9 @@ export default function Login({handleLog, log }) {
 
     setActiveIndex(index);
     if (index === 3) {
-       
         navigate("/about");
         setActiveIndex(0);
         handleLog(false);
-        
-
     }
   }
 
@@ -93,12 +104,12 @@ export default function Login({handleLog, log }) {
                                 <div>
                                     <h2 className="text-gray-700 font-semibold mb-2">Theme</h2>
                                     <div className="flex gap-3">
-                                    <button className="flex-1 border rounded-xl py-3 flex flex-col items-center hover:bg-gray-50">
+                                    <button onClick={() => setTheme("light")} className="flex-1 border rounded-xl py-3 flex flex-col items-center hover:bg-gray-50">
                                         <span className="text-xl">☀️</span>
                                         <span className="text-sm mt-1 text-gray-700">Light</span>
                                     </button>
 
-                                    <button className="flex-1 border rounded-xl py-3 flex flex-col items-center hover:bg-gray-50">
+                                    <button onClick={() => setTheme("dark")} className="flex-1 border rounded-xl py-3 flex flex-col items-center hover:bg-gray-50">
                                         <span className="text-xl">🌙</span>
                                         <span className="text-sm mt-1 text-gray-700">Dark</span>
                                     </button>

@@ -1,5 +1,6 @@
 import React from "react";
 import * as LoginComponents from './login2.jsx';
+// import * as LoginComponents from './.jsx';
  import { useNavigate } from "react-router-dom";
 
 import { Share } from "lucide-react";
@@ -8,7 +9,7 @@ import { Share } from "lucide-react";
 function Home(props) {
 
   // () => window.location.href = '/login'
-     const navigate = useNavigate();
+  const navigate = useNavigate();
   
 
   
@@ -105,7 +106,7 @@ function Home(props) {
         <a
           onClick={handleVoice}
           href="#"
-          className="group bg-white/50 backdrop-blur-lg hover:bg-white/70 active:scale-95 shadow-lg hover:shadow-xl rounded-2xl px-8 py-8 w-[280px] transition-transform duration-150 hover:-translate-y-2 border border-white/20 cursor-pointer"
+          className={`group bg-white/50 backdrop-blur-lg hover:bg-white/70 active:scale-95 shadow-lg hover:shadow-xl rounded-3xl px-8 py-8 ${props.logged ? "w-[400px]" : "w-[280px]"} transition-transform duration-150 hover:-translate-y-2 border border-white/20 cursor-pointer`}
         >
           <h3 className="text-blue-700 font-semibold text-lg mb-3 group-hover:text-blue-800">
             Start Speaking
@@ -120,14 +121,14 @@ function Home(props) {
         <a
         onClick={handleChat}
           href="#"
-          className="group bg-white/50 backdrop-blur-lg hover:bg-white/70 active:scale-95 shadow-lg hover:shadow-xl rounded-2xl px-8 py-8 w-[280px] transition-transform duration-150 hover:-translate-y-2 border border-white/20 cursor-pointer"
+          className={`group bg-white/50 backdrop-blur-lg hover:bg-white/70 active:scale-95 shadow-lg hover:shadow-xl rounded-3xl px-8 py-8 ${props.logged ? "w-[400px]" : "w-[280px]"} transition-transform duration-150 hover:-translate-y-2 border border-white/20 cursor-pointer`}
         >
           <h3 className="text-blue-700 font-semibold text-lg mb-3 group-hover:text-blue-800">
             Start Chating
           </h3>
           <p className="text-gray-700 text-sm leading-relaxed group-hover:text-gray-900">
-            Integrate DeepSeek into your projects. <br />
-            Build the future with intelligence.
+            You will chat with a AI our Agent. <br />
+            Making a mistake by You, will be Corrected by AI assistant.
           </p>
         </a>
       </div>
