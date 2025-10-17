@@ -10,9 +10,12 @@ import MicController from './miccontroller.jsx'
  
 
   function Navbar({ onLogout, passtalkMode }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [openLogin, setOpenLogin] = useState(false);
+
+  const [openSetting, setOpenSetting] = useState(false);
+  const [openProfile, setOpenProfile] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [index , setIndex] = useState(0)
+  
   
   const navigate = useNavigate();
 
@@ -23,8 +26,9 @@ import MicController from './miccontroller.jsx'
     navigate("/");
   }
 
-  function  handelOpenLogin(value){
-    setOpenLogin(value);
+  function  handelOpenSetting(value ,i ){
+    setOpenSetting(value);
+    setIndex(i)
   }
 
   function handleIsOpen(value){
@@ -122,7 +126,11 @@ import MicController from './miccontroller.jsx'
               {/* Item 2 - Settings */}
               <li>
                 <a className="flex items-center gap-2"
-                onClick={() => setOpenLogin(true)}>
+                onClick={() => {
+                  setOpenSetting(true);
+                  setIndex(1)
+                
+                }}>
                   <Settings className="h-4 w-4 text-gray-600" />
                   Settings
                 </a>
@@ -148,16 +156,19 @@ import MicController from './miccontroller.jsx'
               </li>
 
               {/* Item 5 - Login (if not logged in) */}
-              {!isLoggedIn && (
+             
                 <li>
                   <button
-                    onClick={() => setOpenLogin(true)}
+                     onClick={() => {
+                  setOpenSetting(true);
+                  setIndex(0);
+                }}
                     className="btn btn-primary w-full mt-1"
                   >
                     Login
                   </button>
                 </li>
-              )}
+            
             </ul>
           </div>
 
@@ -165,19 +176,13 @@ import MicController from './miccontroller.jsx'
         {/* </div> */}
       </div>
 
-      
-
-
       {/* Contact Us Modal */}
        
 
-      
-
-
-
 
       {/* loggin */}
-      <Login handleLog={handelOpenLogin } log={openLogin} />
+      <Login handleLog={handelOpenSetting } log={openSetting} itemIndex = {index} />
+      {/* <Login handleLog={handelOpenLogin } log={openLogin} /> */}
 
      
       <ContactUs handleOpen={handleIsOpen } open={isOpen} />

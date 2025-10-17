@@ -1,8 +1,11 @@
 import React from "react";
+ import { useNavigate } from "react-router-dom";
 
 export default function Logo() {
+  const navigate = useNavigate();
+    
   return (
-    <div className="fixed top-2 left-25 flex flex-col items-center z-50 scale-60">
+    <div onClick={()=>{navigate("/")}} className="fixed top-2  left-25 flex flex-col items-center z-50 scale-60">
       <svg
         viewBox="0 0 24 24"
         fill="none"

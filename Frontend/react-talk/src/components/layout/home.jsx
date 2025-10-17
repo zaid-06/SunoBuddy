@@ -89,7 +89,7 @@ function Home(props) {
           onClick={handleLogin}
           href="#"
           
-          className="group bg-white/50 backdrop-blur-lg hover:bg-white/70 active:scale-95 shadow-lg hover:shadow-xl rounded-2xl px-8 py-8 w-[280px] transition-transform duration-150 hover:-translate-y-2 border border-white/20 cursor-pointer"
+          className="group bg-white/50 backdrop-blur-lg hover:bg-white/70 active:scale-95 shadow-lg hover:shadow-xl rounded-3xl px-8 py-8 w-[280px] transition-transform duration-150 hover:-translate-y-2 border border-white/20 cursor-pointer"
         >
           <h3 className="text-blue-700 font-semibold text-lg mb-3 group-hover:text-blue-800">
             Login Free now
@@ -101,7 +101,6 @@ function Home(props) {
         </a>
         
         )}
-
         {/* Card 2 */}
         <a
           onClick={handleVoice}
