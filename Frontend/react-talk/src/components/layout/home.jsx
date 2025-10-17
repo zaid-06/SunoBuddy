@@ -1,5 +1,6 @@
 import React from "react";
 import * as LoginComponents from './login2.jsx';
+ import { useNavigate } from "react-router-dom";
 
 import { Share } from "lucide-react";
 
@@ -7,11 +8,18 @@ import { Share } from "lucide-react";
 function Home(props) {
 
   // () => window.location.href = '/login'
+     const navigate = useNavigate();
+  
+
+  
 
   console.log("in home page: ", props.logged);
 
   function handleLogin() {
-      window.location.href = '/login';
+    
+
+    // window.location.href = '/login';
+    navigate("/login");
     
   }
 
@@ -19,10 +27,12 @@ function Home(props) {
   function handleVoice() {
 
     if (props.logged) {
-      
-      window.location.href = '/voiceBot';
+      props.handleTalkMode("mic");
+      // window.location.href = '/voiceBot';
+      navigate("/voiceBot");
     }else{
-      window.location.href = '/login';
+      // window.location.href = '/login';
+      navigate("/login");
     }
 
   }
@@ -30,9 +40,12 @@ function Home(props) {
 
   function handleChat(){
     if (props.logged) {
-      window.location.href = '/chatBot';
+      props.handleTalkMode("chat");
+      // window.location.href = '/chatBot';
+      navigate("/chatBot");
     }else{
       window.location.href = '/login';
+      navigate("/login");
     }
   }
 
@@ -85,8 +98,8 @@ function Home(props) {
             Experience next-level AI performance.
           </p>
         </a>
-            )}
         
+        )}
 
         {/* Card 2 */}
         <a

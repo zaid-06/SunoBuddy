@@ -4,34 +4,33 @@ import { Mic, MessageCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 
-export default function MicController({ onMicClick, onChatClick, initial = "chat" }) {
+export default function MicController({ onMicClick, onChatClick, initial }) {
+  console.log("MicController initial mode:", initial);
   const [mode, setMode] = useState(initial);
   
   const navigate = useNavigate();
 
   useEffect(() => {
-  const interval = setInterval(() => {
-    setCount((prev) => prev + 1);
-  }, 1000);
+    setMode(initial);
+  }, [initial]);
 
-  return () => clearInterval(interval);
-}, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setCount((prev) => prev + 1);
+  //   }, 1000);
 
-
-
-
-
+  //   return () => clearInterval(interval);
+  // }, []);
 
   function handleMic() {
     setMode("mic");
-    
     if (onMicClick) onMicClick();
-
     navigate("/voiceBot");
     // navigate("/chatBot");
   }
 
   function handleChat() {
+
     setMode("chat");
     if (onChatClick) onChatClick();
     navigate("/chatBot");
@@ -87,3 +86,4 @@ export default function MicController({ onMicClick, onChatClick, initial = "chat
     </div>
   );
 }
+

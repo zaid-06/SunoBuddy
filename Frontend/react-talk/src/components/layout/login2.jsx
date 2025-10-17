@@ -25,8 +25,6 @@ export function LoginPage({ onLoginSuccess }) {
 
   const handleLogin = async (e) => {
   e.preventDefault();
-  
-
   try {
     const res = await fetch("http://localhost:5000/api/auth/login", {
       method: "POST",
@@ -59,6 +57,9 @@ export function LoginPage({ onLoginSuccess }) {
     
     
   };
+  function createAccountClcked(){
+    navigate("/register");
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center from-indigo-500 via-purple-500 to-pink-500 p-6 relative">
@@ -142,7 +143,7 @@ export function LoginPage({ onLoginSuccess }) {
               Forgot Password?
             </a>
             <span className="mx-2">•</span>
-            <a href="#" className="hover:text-indigo-600">
+            <a onClick={createAccountClcked} href="#" className="hover:text-indigo-600">
               Create Account
             </a>
           </div>
